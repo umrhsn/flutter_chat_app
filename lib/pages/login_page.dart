@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_app/widgets/custom_form_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -11,6 +12,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: _buildUi(),
     );
   }
@@ -25,6 +27,9 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           children: [
             _headerText(),
+            _loginForm(),
+            _loginButton(),
+            _createAnAccountLink(),
           ],
         ),
       ),
@@ -54,6 +59,64 @@ class _LoginPageState extends State<LoginPage> {
               color: Colors.grey,
             ),
           )
+        ],
+      ),
+    );
+  }
+
+  Widget _loginForm() {
+    return Container(
+      height: MediaQuery.sizeOf(context).height * 0.40,
+      margin: EdgeInsets.symmetric(vertical: MediaQuery.sizeOf(context).height * 0.05),
+      child: Form(
+          child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          CustomFormField(
+            height: MediaQuery.sizeOf(context).height * 0.1,
+            hintText: 'Email',
+          ),
+          CustomFormField(
+            height: MediaQuery.sizeOf(context).height * 0.1,
+            hintText: 'Password',
+          ),
+        ],
+      )),
+    );
+  }
+
+  Widget _loginButton() {
+    return SizedBox(
+      width: MediaQuery.sizeOf(context).width,
+      child: MaterialButton(
+        onPressed: () {},
+        color: Theme.of(context).colorScheme.primary,
+        child: Text(
+          'Login',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _createAnAccountLink() {
+    return Expanded(
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Text("Don't have an account? "),
+          Text(
+            'Sign Up',
+            style: TextStyle(
+              fontWeight: FontWeight.w800,
+            ),
+          ),
         ],
       ),
     );
