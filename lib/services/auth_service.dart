@@ -9,12 +9,14 @@ class AuthService {
     return _user;
   }
 
-  AuthService() {}
+  AuthService() {
+    _firebaseAuth.authStateChanges().listen(authStateChangesStreamListener);
+  }
 
   Future<bool> login(String email, String password) async {
     try {
-      final credential =
-          await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+      final credential = await _firebaseAuth.signInWithEmailAndPassword(
+          email: email, password: password);
       if (credential.user != null) {
         _user = credential.user;
         return true;
@@ -23,5 +25,9 @@ class AuthService {
       debugPrint('$e');
     }
     return false;
+  }
+
+  void authStateChangesStreamListener(User? user) {
+    _user = user;
   }
 }

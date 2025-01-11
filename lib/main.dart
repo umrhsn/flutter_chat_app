@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_chat_app/pages/login_page.dart';
+import 'package:flutter_chat_app/services/auth_service.dart';
 import 'package:flutter_chat_app/services/navigation_service.dart';
 import 'package:flutter_chat_app/utils.dart';
 import 'package:get_it/get_it.dart';
@@ -19,9 +19,11 @@ Future<void> setup() async {
 class MyApp extends StatelessWidget {
   final GetIt _getIt = GetIt.instance;
 
+  late AuthService _authService;
   late NavigationService _navigationService;
 
   MyApp({super.key}) {
+    _authService = _getIt.get<AuthService>();
     _navigationService = _getIt.get<NavigationService>();
   }
 
@@ -34,7 +36,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         textTheme: GoogleFonts.montserratTextTheme(),
       ),
-      initialRoute: "/login",
+      initialRoute: _authService.user != null ? '/home' : '/login',
       routes: _navigationService.routes,
     );
   }
