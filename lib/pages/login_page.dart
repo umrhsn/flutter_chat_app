@@ -162,10 +162,15 @@ class _LoginPageState extends State<LoginPage> {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text("Don't have an account? "),
-          Text(
-            'Sign Up',
-            style: TextStyle(
-              fontWeight: FontWeight.w800,
+          GestureDetector(
+            onTap: () {
+              _navigationService.pushNamed('/register');
+            },
+            child: Text(
+              'Sign Up',
+              style: TextStyle(
+                fontWeight: FontWeight.w800,
+              ),
             ),
           ),
         ],
