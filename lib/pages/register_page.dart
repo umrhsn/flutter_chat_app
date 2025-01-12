@@ -16,6 +16,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final GetIt _getIt = GetIt.instance;
+  final GlobalKey<FormState> _registerFormKey = GlobalKey();
 
   late MediaService _mediaService;
   late NavigationService _navigationService;
@@ -90,6 +91,7 @@ class _RegisterPageState extends State<RegisterPage> {
       margin: EdgeInsets.symmetric(
           vertical: MediaQuery.sizeOf(context).height * 0.05),
       child: Form(
+        key: _registerFormKey,
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -158,7 +160,13 @@ class _RegisterPageState extends State<RegisterPage> {
       child: MaterialButton(
         color: Theme.of(context).colorScheme.primary,
         onPressed: () {
-          try {} catch (e) {
+          try {
+            if (_registerFormKey.currentState?.validate() ??
+                // ignore: dead_code
+                false && selectedImage != null) {
+              _registerFormKey.currentState?.save();
+            }
+          } catch (e) {
             debugPrint('$e');
           }
         },
