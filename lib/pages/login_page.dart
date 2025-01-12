@@ -131,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
         onPressed: () async {
           if (_loginFormKey.currentState?.validate() ?? false) {
             _loginFormKey.currentState?.save();
-            bool result = await _authService.login(email!, password!);
+            bool result = await _authService.logIn(email!, password!);
             debugPrint('$result');
             if (result) {
               _navigationService.pushReplacementNamed('/home');

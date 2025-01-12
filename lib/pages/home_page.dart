@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             onPressed: () async {
-              bool result = await _authService.logout();
+              bool result = await _authService.logOut();
               if (result) {
                 _alertService.showToast(
                   text: 'Logged out successfully!',
